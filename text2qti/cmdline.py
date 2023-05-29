@@ -37,6 +37,8 @@ def main():
                         help='URL for rendering LaTeX equations')
     parser.add_argument('--run-code-blocks', action='store_const', const=True,
                         help='Allow special code blocks to be executed and insert their output (off by default for security)')
+    parser.add_argument('--allow-identical-questions', action='store_const', const=True,
+                        help='Allow identical questions')
     parser.add_argument('--pandoc-mathml', action='store_const', const=True,
                         help='Convert LaTeX math to MathML using Pandoc (this will create a cache file "_text2qti_cache.zip" in the quiz file directory)')
     soln_group = parser.add_mutually_exclusive_group()
@@ -88,6 +90,10 @@ def main():
         config['latex_render_url'] = args.latex_render_url
     if args.run_code_blocks is not None:
         config['run_code_blocks'] = args.run_code_blocks
+
+    if args.allow_identical_questions is not None:
+        config['allow_identical_questions'] = args.allow_identical_questions
+    
     if args.pandoc_mathml is not None:
         config['pandoc_mathml'] = args.pandoc_mathml
 
